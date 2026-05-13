@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Sitemap: https://assurance-professionnels-auto.fr/sitemap.xml
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /wp-admin/
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /

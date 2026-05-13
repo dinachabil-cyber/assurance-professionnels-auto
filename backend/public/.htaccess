@@ -1,0 +1,51 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html/public;
+    index index.php index.html;
+
+    server_name _;
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.googletagmanager.com https://*.google-analytics.com wss:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" always;
+
+    # Main location - SPA fallback
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # PHP handling
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    # Static assets caching
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|otf|webp|avif)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        log_not_found off;
+    }
+
+    # Deny access to dot files
+    location ~ /\. {
+        deny all;
+    }
+
+    # Health check
+    location = /health {
+        return 200 'healthy';
+        add_header Content-Type text/plain;
+    }
+
+    access_log /var/log/nginx/assurance_access.log;
+    error_log /var/log/nginx/assurance_error.log;
+}
