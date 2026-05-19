@@ -20,7 +20,7 @@ class NegociantsDevisController extends Controller
             'demarrage'        => ['nullable', Rule::in(['OUI', 'NON'])],
             'assure'           => ['nullable', Rule::in(['OUI', 'NON'])],
             'ancienne'         => ['nullable', Rule::in(['OUI', 'NON'])],
-            'motif_resiliation'=> ['nullable', 'string', 'in:Sinistre,Non paiement,Amiable,Echéance'],
+            'motif_resiliation'=> ['nullable', 'string', 'in:Sinistre,Non paiement,Amiable,Échéance'],
             'email'            => ['nullable', 'email', 'max:255'],
             'telephone'        => ['nullable', 'string', 'regex:/^0[1-9][0-9]{8}$/'],
         ], [

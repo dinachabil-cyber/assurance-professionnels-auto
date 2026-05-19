@@ -15,70 +15,82 @@ export default function NegociantsAutoPage() {
   const scrollToForm = () => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setError(null);
-    const fd = new FormData(e.currentTarget);
-    const data = Object.fromEntries(fd);
+  const form = e.currentTarget; // ✅ IMPORTANT
 
-    if (!data.nom?.trim()) {
-      setSubmitting(false);
-      return setError('Le nom est requis.');
-    }
-    if (!data.prenom?.trim()) {
-      setSubmitting(false);
-      return setError('Le prénom est requis.');
-    }
-    if (data.email && !validateEmail(data.email)) {
-      setSubmitting(false);
-      return setError('Email invalide.');
-    }
-    if (data.tele && !validatePhone(data.tele)) {
-      setSubmitting(false);
-      return setError('Téléphone invalide (10 chiffres).');
-    }
-    if (!data.email && !data.tele) {
-      setSubmitting(false);
-      return setError('Email ou téléphone requis.');
-    }
+  setSubmitting(true);
+  setError(null);
 
-    try {
-      const resp = await fetch('/api/v1/negociants-devis', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-        body: JSON.stringify({
-          nom: data.nom.trim(),
-          prenom: data.prenom.trim(),
-          raison_sociale: data.raison_sociale?.trim() || null,
-          demarrage: data.demarrage || null,
-          assure: data.assure || null,
-          ancienne: data.ancienne || null,
-          motif_resiliation: data.motif || null,
-          email: data.email?.trim() || null,
-          telephone: data.tele?.trim() || null,
-        }),
-      });
-      const result = await resp.json();
-      if (resp.ok && result.success) {
-        e.currentTarget.reset();
-        if (result.data?.id) {
-          navigate(`/devis/${result.data.id}/confirmation`);
-        }
-      } else {
-        setError(result.message || 'Erreur. Veuillez réessayer.');
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd);
+
+  if (!data.nom?.trim()) {
+    setSubmitting(false);
+    return setError('Le nom est requis.');
+  }
+
+  if (!data.prenom?.trim()) {
+    setSubmitting(false);
+    return setError('Le prénom est requis.');
+  }
+
+  if (data.email && !validateEmail(data.email)) {
+    setSubmitting(false);
+    return setError('Email invalide.');
+  }
+
+  if (data.tele && !validatePhone(data.tele)) {
+    setSubmitting(false);
+    return setError('Téléphone invalide (10 chiffres).');
+  }
+
+  if (!data.email && !data.tele) {
+    setSubmitting(false);
+    return setError('Email ou téléphone requis.');
+  }
+
+  try {
+    const resp = await fetch('/api/v1/negociants-devis', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: JSON.stringify({
+        nom: data.nom.trim(),
+        prenom: data.prenom.trim(),
+        raison_sociale: data.raison_sociale?.trim() || null,
+        demarrage: data.demarrage || null,
+        assure: data.assure || null,
+        ancienne: data.ancienne || null,
+        motif_resiliation: data.motif || null,
+        email: data.email?.trim() || null,
+        telephone: data.tele?.trim() || null,
+      }),
+    });
+
+    const result = await resp.json();
+
+    if (resp.ok && result.success) {
+      form.reset(); // ✅ FIXED
+
+      if (result.data?.id) {
+        navigate(`/devis/${result.data.id}/confirmation`);
       }
-    } catch {
-      setError('Erreur de connexion.');
-    } finally {
-      setSubmitting(false);
+    } else {
+      setError(result.message || 'Erreur. Veuillez réessayer.');
     }
-  };
+  } catch (err) {
+    console.error('Form submission error:', err);
+    setError('Erreur de connexion. Veuillez réessayer.');
+  } finally {
+    setSubmitting(false);
+  }
+};
+  
 
   return (
     <>

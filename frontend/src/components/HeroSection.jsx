@@ -5,57 +5,89 @@ export default function HeroSection() {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  
 
   const validatePhone = (p) => /^0[1-9]\d{8}$/.test(p.replace(/\s/g, '')) || /^0[67]\d{8}$/.test(p.replace(/\s/g, ''));
   const validateEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true); setError(null);
-    const fd = new FormData(e.currentTarget);
-    const data = Object.fromEntries(fd);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!data.nom?.trim()) { return setSubmitting(false) || setError('Le nom est requis.'); }
-    if (!data.prenom?.trim()) { return setSubmitting(false) || setError('Le prénom est requis.'); }
-    if (data.email && !validateEmail(data.email)) { return setSubmitting(false) || setError('Email invalide.'); }
-    if (data.tele && !validatePhone(data.tele)) { return setSubmitting(false) || setError('Téléphone invalide (10 chiffres).'); }
-    if (!data.email && !data.tele) { return setSubmitting(false) || setError('Email ou téléphone requis.'); }
+  const form = e.currentTarget;
 
-    try {
-      const resp = await fetch('/api/v1/devis', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-        body: JSON.stringify({
-          nom: data.nom.trim(), prenom: data.prenom.trim(),
-          raison_sociale: data.raison_sociale?.trim() || null,
-          activite: data.activite?.trim() || null,
-          demarrage: data.demarrage || null, assure: data.assure || null,
-          ancienne: data.ancienne || null, motif_resiliation: data.motif || null,
-          code_postal: data.code?.trim() || null,
-          email: data.email?.trim() || null, telephone: data.tele?.trim() || null,
-        }),
-      });
-      const result = await resp.json();
-if (resp.ok && result.success) {
-         setSuccess(true);
-         e.currentTarget.reset();
-        if (result.data?.id) { navigate(`/devis/${result.data.id}/confirmation`); }
-      } else { setError(result.message || 'Erreur. Veuillez réessayer.'); }
-    } catch { setError('Erreur de connexion.'); }
-    finally { setSubmitting(false); }
-  };
+  setSubmitting(true);
+  setError(null);
 
-  if (success) {
-    return (
-      <section className="py-12 md:py-16 bg-gradient-to-br from-orange-500 to-orange-600">
-        <div className="max-w-2xl mx-auto px-4 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Demande envoyée !</h2>
-          <p className="text-orange-100">Un conseiller vous contactera sous peu.</p>
-        </div>
-      </section>
-    );
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd);
+
+  if (!data.nom?.trim()) {
+    setSubmitting(false);
+    return setError('Le nom est requis.');
   }
+
+  if (!data.prenom?.trim()) {
+    setSubmitting(false);
+    return setError('Le prénom est requis.');
+  }
+
+  if (data.email && !validateEmail(data.email)) {
+    setSubmitting(false);
+    return setError('Email invalide.');
+  }
+
+  if (data.tele && !validatePhone(data.tele)) {
+    setSubmitting(false);
+    return setError('Téléphone invalide (10 chiffres).');
+  }
+
+  if (!data.email && !data.tele) {
+    setSubmitting(false);
+    return setError('Email ou téléphone requis.');
+  }
+
+  try {
+    const resp = await fetch('/api/v1/devis', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: JSON.stringify({
+        nom: data.nom.trim(),
+        prenom: data.prenom.trim(),
+        raison_sociale: data.raison_sociale?.trim() || null,
+        activite: data.activite?.trim() || null,
+        demarrage: data.demarrage || null,
+        assure: data.assure || null,
+        ancienne: data.ancienne || null,
+        motif_resiliation: data.motif || null,
+        code_postal: data.code?.trim() || null,
+        email: data.email?.trim() || null,
+        telephone: data.tele?.trim() || null,
+      }),
+    });
+
+    const result = await resp.json();
+
+    if (resp.ok && result.success) {
+      form.reset(); // ✅ FIX
+
+      if (result.data?.id) {
+        navigate(`/devis/${result.data.id}/confirmation`);
+      }
+    } else {
+      setError(result.message || 'Erreur. Veuillez réessayer.');
+    }
+  } catch (err) {
+    console.error('Form submission error:', err);
+    setError('Erreur de connexion. Veuillez réessayer.');
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   return (
     <section className="py-12 md:py-16 bg-gradient-to-br from-orange-500 to-orange-600">

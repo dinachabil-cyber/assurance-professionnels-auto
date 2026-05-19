@@ -18,9 +18,11 @@ export default function GarageAutomobilePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.currentTarget; // ✅ FIX: save before any await
     setSubmitting(true);
     setError(null);
-    const fd = new FormData(e.currentTarget);
+
+    const fd = new FormData(form); // ✅ use form, not e.currentTarget
     const data = Object.fromEntries(fd);
 
     if (!data.nom?.trim()) {
@@ -64,17 +66,20 @@ export default function GarageAutomobilePage() {
           telephone: data.tele?.trim() || null,
         }),
       });
+
       const result = await resp.json();
+
       if (resp.ok && result.success) {
-        e.currentTarget.reset();
+        form.reset(); // ✅ FIX: use saved form reference
         if (result.data?.id) {
           navigate(`/devis/${result.data.id}/confirmation`);
         }
       } else {
         setError(result.message || 'Erreur. Veuillez réessayer.');
       }
-    } catch {
-      setError('Erreur de connexion.');
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setError('Erreur de connexion. Veuillez réessayer.');
     } finally {
       setSubmitting(false);
     }
@@ -106,23 +111,26 @@ export default function GarageAutomobilePage() {
                 className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl"
               />
             </div>
-{/* Form card */}
-             <div
-               ref={scrollRef}
-               id="garageForm"
-               className="bg-white rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col overflow-hidden"
-             >
+
+            {/* Form card */}
+            <div
+              ref={scrollRef}
+              id="garageForm"
+              className="bg-white rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col overflow-hidden"
+            >
               <h2 className="text-2xl font-bold text-gray-800 mb-1">
                 Obtenez un devis gratuit
               </h2>
               <p className="text-sm text-gray-500 mb-6">
                 Complétez en 2 minutes
               </p>
+
               {error && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
                   {error}
                 </div>
               )}
+
               <form
                 onSubmit={handleSubmit}
                 noValidate
@@ -162,6 +170,7 @@ export default function GarageAutomobilePage() {
                     />
                   </div>
                 </div>
+
                 <div>
                   <label
                     htmlFor="raison_sociale"
@@ -177,6 +186,7 @@ export default function GarageAutomobilePage() {
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
                   />
                 </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label
@@ -213,6 +223,7 @@ export default function GarageAutomobilePage() {
                     </select>
                   </div>
                 </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label
@@ -251,6 +262,7 @@ export default function GarageAutomobilePage() {
                     </select>
                   </div>
                 </div>
+
                 <div>
                   <label
                     htmlFor="code"
@@ -269,6 +281,7 @@ export default function GarageAutomobilePage() {
                     inputMode="numeric"
                   />
                 </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label
@@ -303,10 +316,12 @@ export default function GarageAutomobilePage() {
                     />
                   </div>
                 </div>
+
                 <p className="text-xs text-gray-500">
                   En cliquant sur 'Comparer', vous acceptez de transmettre vos
                   informations à AKSAM ASSURANCES.
                 </p>
+
                 <button
                   type="submit"
                   disabled={submitting}
@@ -320,7 +335,8 @@ export default function GarageAutomobilePage() {
         </div>
       </section>
 
-   <section className="py-20 bg-gray-50">
+      {/* ── DEFINITION ────────────────────────────────────────────── */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             Qu'est-ce qu'une assurance pour garage automobile ?
@@ -358,8 +374,8 @@ export default function GarageAutomobilePage() {
               },
               {
                 icon: '🏗️',
-                title: 'Responsabilité Civile d\'Exploitation',
-                desc: 'Protège contre les dommages causés dans le cadre de l\'exploitation du garage (chute d\'un client, etc.).',
+                title: "Responsabilité Civile d'Exploitation",
+                desc: "Protège contre les dommages causés dans le cadre de l'exploitation du garage (chute d'un client, etc.).",
               },
               {
                 icon: '🚗',
@@ -378,8 +394,8 @@ export default function GarageAutomobilePage() {
               },
               {
                 icon: '💰',
-                title: 'Perte d\'Exploitation',
-                desc: 'Indemnise les pertes financières liées à une interruption d\'activité suite à un sinistre.',
+                title: "Perte d'Exploitation",
+                desc: "Indemnise les pertes financières liées à une interruption d'activité suite à un sinistre.",
               },
             ].map((g, i) => (
               <div
@@ -405,29 +421,22 @@ export default function GarageAutomobilePage() {
         <section className="bg-gradient-to-r from-orange-400 to-orange-500 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
           <div className="relative">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
-            Devis assurance garagiste
-            
-
+              Devis assurance garagiste
             </h2>
             <p className="text-base mb-8 text-gray-800/80 max-w-xl mx-auto leading-relaxed">
-             Pour obtenir un devis RC PRO garagiste, complétez le formulaire en
-            haut de la page. Simple et rapide, obtenez votre devis en ligne et
-            en quelques clics.
+              Pour obtenir un devis RC PRO garagiste, complétez le formulaire en
+              haut de la page. Simple et rapide, obtenez votre devis en ligne et
+              en quelques clics.
             </p>
             <button
               onClick={scrollToForm}
               className="bg-white text-orange-500 font-bold py-3 px-8 rounded-xl hover:opacity-90 transition-all transform hover:scale-105 shadow-lg text-sm"
             >
-             
-            Obtenir un devis personnalisé
+              Obtenir un devis personnalisé
             </button>
           </div>
         </section>
       </div>
-
-      {/* ── DEFINITION ────────────────────────────────────────────── */}
-   
-   
     </>
   );
 }

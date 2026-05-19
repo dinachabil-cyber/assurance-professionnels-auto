@@ -73,14 +73,15 @@ export default function LoueurVoiturePage() {
       } else {
         setError(result.message || 'Erreur. Veuillez réessayer.');
       }
-    } catch {
-      setError('Erreur de connexion.');
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setError('Erreur de connexion. Veuillez réessayer.');
     } finally {
       setSubmitting(false);
     }
   };
 
-  return (
+    return (
     <>
       <Helmet>
         <title>Assurance loueur de voiture - RC PRO location</title>

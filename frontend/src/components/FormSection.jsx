@@ -22,27 +22,29 @@ export default function FormSection({ onSubmitSuccess }) {
     if (!data.email && !data.tele) {return setSubmitting(false) || setError('Email ou téléphone requis.');}
 
     try {
-      const resp = await fetch('/api/v1/devis', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-        body: JSON.stringify({
-          nom: data.nom.trim(), prenom: data.prenom.trim(),
-          raison_sociale: data.raison_sociale?.trim() || null,
-          activite: data.activite?.trim() || null,
-          demarrage: data.demarrage || null, assure: data.assure || null,
-          ancienne: data.ancienne || null, motif_resiliation: data.motif || null,
-          code_postal: data.code?.trim() || null,
-          email: data.email?.trim() || null, telephone: data.tele?.trim() || null,
-        }),
-      });
-      const result = await resp.json();
-if (resp.ok && result.success) {
-                         setSuccess(true);
-                         e.currentTarget.reset();
-        if (onSubmitSuccess && result.data?.id) {onSubmitSuccess(result.data.id);}
-      } else { setError(result.message || 'Erreur. Veuillez réessayer.'); }
-     } catch { setError('Erreur de connexion.'); }
-    finally { setSubmitting(false); }
+       const resp = await fetch('/api/v1/devis', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+         body: JSON.stringify({
+           nom: data.nom.trim(), prenom: data.prenom.trim(),
+           raison_sociale: data.raison_sociale?.trim() || null,
+           activite: data.activite?.trim() || null,
+           demarrage: data.demarrage || null, assure: data.assure || null,
+           ancienne: data.ancienne || null, motif_resiliation: data.motif || null,
+           code_postal: data.code?.trim() || null,
+           email: data.email?.trim() || null, telephone: data.tele?.trim() || null,
+         }),
+       });
+       const result = await resp.json();
+       if (resp.ok && result.success) {
+         setSuccess(true);
+         e.currentTarget.reset();
+         if (onSubmitSuccess && result.data?.id) {onSubmitSuccess(result.data.id);}
+       } else { setError(result.message || 'Erreur. Veuillez réessayer.'); }
+     } catch (err) {
+       console.error('Form submission error:', err);
+       setError('Erreur de connexion. Veuillez réessayer.');
+     } finally { setSubmitting(false); }
   };
 
   if (success) {

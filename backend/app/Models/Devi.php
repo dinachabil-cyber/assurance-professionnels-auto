@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'code_postal',
     'email',
     'telephone',
-   
 ])]
 class Devi extends Model
 {

@@ -16,95 +16,98 @@ export default function AutoEcolePage() {
     formRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-   const handleSubmit = async (e) => {
-     e.preventDefault();
-     setSubmitting(true);
-     setError(null);
-     const fd = new FormData(e.currentTarget);
-     const data = Object.fromEntries(fd);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget; // ✅ FIX: save before any await
+    setSubmitting(true);
+    setError(null);
 
-     if (!data.nom?.trim()) {
-       setSubmitting(false);
-       return setError('Le nom est requis.');
-     }
-     if (!data.prenom?.trim()) {
-       setSubmitting(false);
-       return setError('Le prénom est requis.');
-     }
-     if (data.email && !validateEmail(data.email)) {
-       setSubmitting(false);
-       return setError('Email invalide.');
-     }
-     if (data.tele && !validatePhone(data.tele)) {
-       setSubmitting(false);
-       return setError('Téléphone invalide (10 chiffres).');
-     }
-     if (!data.email && !data.tele) {
-       setSubmitting(false);
-       return setError('Email ou téléphone requis.');
-     }
+    const fd = new FormData(form); // ✅ use form
+    const data = Object.fromEntries(fd);
 
-     try {
-       const resp = await fetch('/api/v1/auto-ecole-devis', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-           Accept: 'application/json',
-           'X-Requested-With': 'XMLHttpRequest',
-         },
-         body: JSON.stringify({
-           nom: data.nom.trim(),
-           prenom: data.prenom.trim(),
-           raison_sociale: data.raison_sociale?.trim() || null,
-           demarrage: data.demarrage || null,
-           assure: data.assure || null,
-           ancienne: data.ancienne || null,
-           motif_resiliation: data.motif || null,
-           email: data.email?.trim() || null,
-           telephone: data.tele?.trim() || null,
-         }),
-       });
-       const result = await resp.json();
-       if (resp.ok && result.success) {
-         e.currentTarget.reset();
-         if (result.data?.id) {
-           navigate(`/devis/${result.data.id}/confirmation`);
-         }
-       } else {
-         setError(result.message || 'Erreur. Veuillez réessayer.');
-       }
-     } catch {
-       setError('Erreur de connexion.');
-     } finally {
-       setSubmitting(false);
-     }
-   };
+    if (!data.nom?.trim()) {
+      setSubmitting(false);
+      return setError('Le nom est requis.');
+    }
+    if (!data.prenom?.trim()) {
+      setSubmitting(false);
+      return setError('Le prénom est requis.');
+    }
+    if (data.email && !validateEmail(data.email)) {
+      setSubmitting(false);
+      return setError('Email invalide.');
+    }
+    if (data.tele && !validatePhone(data.tele)) {
+      setSubmitting(false);
+      return setError('Téléphone invalide (10 chiffres).');
+    }
+    if (!data.email && !data.tele) {
+      setSubmitting(false);
+      return setError('Email ou téléphone requis.');
+    }
+
+    try {
+      const resp = await fetch('/api/v1/auto-ecole-devis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify({
+          nom: data.nom.trim(),
+          prenom: data.prenom.trim(),
+          raison_sociale: data.raison_sociale?.trim() || null,
+          demarrage: data.demarrage || null,
+          assure: data.assure || null,
+          ancienne: data.ancienne || null,
+          motif_resiliation: data.motif || null,
+          email: data.email?.trim() || null,
+          telephone: data.tele?.trim() || null,
+        }),
+      });
+      const result = await resp.json();
+      if (resp.ok && result.success) {
+        form.reset(); // ✅ FIX: use saved form reference
+        if (result.data?.id) {
+          navigate(`/devis/${result.data.id}/confirmation`);
+        }
+      } else {
+        setError(result.message || 'Erreur. Veuillez réessayer.');
+      }
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setError('Erreur de connexion. Veuillez réessayer.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const guarantees = [
     {
       icon: '🛡️',
       title: 'Responsabilité civile professionnelle',
-      desc: 'Couvre les dommages corporels, matériels et immatériels causés aux tiers (élèves, piétons, autres conducteurs) lors des leçons de conduite.',
+      desc: "Couvre les dommages corporels, matériels et immatériels causés aux tiers (élèves, piétons, autres conducteurs) lors des leçons de conduite.",
     },
     {
       icon: '🚗',
       title: 'Assurance des véhicules',
-      desc: 'Protège les véhicules de l\'auto-école contre les dommages, vol et vandalisme, ainsi que les dommages causés aux autres véhicules.',
+      desc: "Protège les véhicules de l'auto-école contre les dommages, vol et vandalisme, ainsi que les dommages causés aux autres véhicules.",
     },
     {
       icon: '👨‍🏫',
       title: 'Protection des instructeurs',
-      desc: 'Couvre les moniteurs en cas de blessure ou de dommages subis pendant l\'exercice de leur activité, y compris en cas de faute de l\'élève.',
+      desc: "Couvre les moniteurs en cas de blessure ou de dommages subis pendant l'exercice de leur activité, y compris en cas de faute de l'élève.",
     },
     {
       icon: '👨‍🎓',
       title: 'Garantie des élèves conducteurs',
-      desc: 'Protège les élèves pendant les leçons de conduite, même si ceux-ci sont encore en phase d\'apprentissage et pas en possession d\'un permis.',
+      desc: "Protège les élèves pendant les leçons de conduite, même si ceux-ci sont encore en phase d'apprentissage et pas en possession d'un permis.",
     },
     {
       icon: '🏢',
       title: 'Garantie des locaux',
-      desc: 'Couvre les locaux de l\'auto-école contre les risques comme l\'incendie, le vol ou les dégâts des eaux.',
+      desc: "Couvre les locaux de l'auto-école contre les risques comme l'incendie, le vol ou les dégâts des eaux.",
     },
   ];
 
@@ -135,87 +138,65 @@ export default function AutoEcolePage() {
               />
             </div>
             {/* Form card */}
-             <div
-               ref={formRef}
-               id="ecoleForm"
-               className="bg-white rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col overflow-hidden"
-             >
-               <h2 className="text-2xl font-bold text-gray-800 mb-1">
-                 Obtenez un devis gratuit
-               </h2>
-               <p className="text-sm text-gray-500 mb-6">
-                 Complétez en 2 minutes
-               </p>
-               {error && (
-                 <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
-                   {error}
-                 </div>
-               )}
-               <form
-                 onSubmit={handleSubmit}
-                 noValidate
-                 className="space-y-4 flex-1 overflow-y-auto pr-2"
-               >
+            <div
+              ref={formRef}
+              id="ecoleForm"
+              className="bg-white rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col overflow-hidden"
+            >
+              <h2 className="text-2xl font-bold text-gray-800 mb-1">
+                Obtenez un devis gratuit
+              </h2>
+              <p className="text-sm text-gray-500 mb-6">
+                Complétez en 2 minutes
+              </p>
+              {error && (
+                <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                  {error}
+                </div>
+              )}
+              <form
+                onSubmit={handleSubmit}
+                noValidate
+                className="space-y-4 flex-1 overflow-y-auto pr-2"
+              >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="nom"
-                      className="block text-sm font-medium text-gray-700 mb-1.5"
-                    >
+                    <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-1.5">
                       Nom *
                     </label>
                     <input
-                      type="text"
-                      id="nom"
-                      name="nom"
-                      required
+                      type="text" id="nom" name="nom" required
                       placeholder="Votre nom"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
                     />
                   </div>
                   <div>
-                    <label
-                      htmlFor="prenom"
-                      className="block text-sm font-medium text-gray-700 mb-1.5"
-                    >
+                    <label htmlFor="prenom" className="block text-sm font-medium text-gray-700 mb-1.5">
                       Prénom *
                     </label>
                     <input
-                      type="text"
-                      id="prenom"
-                      name="prenom"
-                      required
+                      type="text" id="prenom" name="prenom" required
                       placeholder="Votre prénom"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
                     />
                   </div>
                 </div>
                 <div>
-                  <label
-                    htmlFor="raison_sociale"
-                    className="block text-sm font-medium text-gray-700 mb-1.5"
-                  >
+                  <label htmlFor="raison_sociale" className="block text-sm font-medium text-gray-700 mb-1.5">
                     Raison sociale
                   </label>
                   <input
-                    type="text"
-                    id="raison_sociale"
-                    name="raison_sociale"
+                    type="text" id="raison_sociale" name="raison_sociale"
                     placeholder="Nom de votre auto-école"
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="demarrage"
-                      className="block text-sm font-medium text-gray-700 mb-1.5"
-                    >
+                    <label htmlFor="demarrage" className="block text-sm font-medium text-gray-700 mb-1.5">
                       Démarrage d'activité
                     </label>
-                    <select
-                      id="demarrage"
-                      name="demarrage"
+                    <select id="demarrage" name="demarrage"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none cursor-pointer"
                     >
                       <option value="">Sélectionnez…</option>
@@ -224,15 +205,10 @@ export default function AutoEcolePage() {
                     </select>
                   </div>
                   <div>
-                    <label
-                      htmlFor="assure"
-                      className="block text-sm font-medium text-gray-700 mb-1.5"
-                    >
+                    <label htmlFor="assure" className="block text-sm font-medium text-gray-700 mb-1.5">
                       Déjà assuré(e) ?
                     </label>
-                    <select
-                      id="assure"
-                      name="assure"
+                    <select id="assure" name="assure"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none cursor-pointer"
                     >
                       <option value="">Sélectionnez…</option>
@@ -243,15 +219,10 @@ export default function AutoEcolePage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="ancienne"
-                      className="block text-sm font-medium text-gray-700 mb-1.5"
-                    >
+                    <label htmlFor="ancienne" className="block text-sm font-medium text-gray-700 mb-1.5">
                       Ancienne assurance résiliée ?
                     </label>
-                    <select
-                      id="ancienne"
-                      name="ancienne"
+                    <select id="ancienne" name="ancienne"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none cursor-pointer"
                     >
                       <option value="">Sélectionnez…</option>
@@ -260,15 +231,10 @@ export default function AutoEcolePage() {
                     </select>
                   </div>
                   <div>
-                    <label
-                      htmlFor="motif"
-                      className="block text-sm font-medium text-gray-700 mb-1.5"
-                    >
+                    <label htmlFor="motif" className="block text-sm font-medium text-gray-700 mb-1.5">
                       Motif de résiliation
                     </label>
-                    <select
-                      id="motif"
-                      name="motif"
+                    <select id="motif" name="motif"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none cursor-pointer"
                     >
                       <option value="">Sélectionnez…</option>
@@ -281,33 +247,21 @@ export default function AutoEcolePage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="tele"
-                      className="block text-sm font-medium text-gray-700 mb-1.5"
-                    >
+                    <label htmlFor="tele" className="block text-sm font-medium text-gray-700 mb-1.5">
                       Téléphone *
                     </label>
                     <input
-                      type="tel"
-                      id="tele"
-                      name="tele"
-                      maxLength={10}
-                      required
+                      type="tel" id="tele" name="tele" maxLength={10} required
                       placeholder="01 23 45 67 89"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
                     />
                   </div>
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-1.5"
-                    >
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
                       Email
                     </label>
                     <input
-                      type="email"
-                      id="email"
-                      name="email"
+                      type="email" id="email" name="email"
                       placeholder="email@exemple.com"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
                     />
@@ -355,8 +309,7 @@ export default function AutoEcolePage() {
               Les garanties RC PRO pour auto-école
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              Découvrez les protections essentielles pour votre activité
-              d'auto-école.
+              Découvrez les protections essentielles pour votre activité d'auto-école.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
