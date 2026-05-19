@@ -6,21 +6,21 @@ export default function GarageAutomobilePage() {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
-  const formRef = useRef(null);
+  const scrollRef = useRef(null);
 
   const validatePhone = (p) =>
     /^0[1-9]\d{8}$/.test(p.replace(/\s/g, '')) || /^0[67]\d{8}$/.test(p.replace(/\s/g, ''));
   const validateEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
   const scrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: 'smooth' });
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
-    const fd = new FormData(formRef.current);
+    const fd = new FormData(e.currentTarget);
     const data = Object.fromEntries(fd);
 
     if (!data.nom?.trim()) {
@@ -66,7 +66,7 @@ export default function GarageAutomobilePage() {
       });
       const result = await resp.json();
       if (resp.ok && result.success) {
-        formRef.current?.reset();
+        e.currentTarget.reset();
         if (result.data?.id) {
           navigate(`/devis/${result.data.id}/confirmation`);
         }
@@ -106,12 +106,12 @@ export default function GarageAutomobilePage() {
                 className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl"
               />
             </div>
-            {/* Form card */}
-            <div
-              ref={formRef}
-              id="garageForm"
-              className="bg-white rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col overflow-hidden"
-            >
+{/* Form card */}
+             <div
+               ref={scrollRef}
+               id="garageForm"
+               className="bg-white rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col overflow-hidden"
+             >
               <h2 className="text-2xl font-bold text-gray-800 mb-1">
                 Obtenez un devis gratuit
               </h2>
@@ -127,7 +127,6 @@ export default function GarageAutomobilePage() {
                 onSubmit={handleSubmit}
                 noValidate
                 className="space-y-4 flex-1 overflow-y-auto pr-2"
-                ref={formRef}
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>

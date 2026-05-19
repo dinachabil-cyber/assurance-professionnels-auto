@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function HeroSection() {
@@ -6,7 +6,6 @@ export default function HeroSection() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const formRef = useRef(null);
 
   const validatePhone = (p) => /^0[1-9]\d{8}$/.test(p.replace(/\s/g, '')) || /^0[67]\d{8}$/.test(p.replace(/\s/g, ''));
   const validateEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
@@ -14,7 +13,7 @@ export default function HeroSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true); setError(null);
-    const fd = new FormData(formRef.current);
+    const fd = new FormData(e.currentTarget);
     const data = Object.fromEntries(fd);
 
     if (!data.nom?.trim()) { return setSubmitting(false) || setError('Le nom est requis.'); }
@@ -38,9 +37,9 @@ export default function HeroSection() {
         }),
       });
       const result = await resp.json();
-      if (resp.ok && result.success) {
-        setSuccess(true);
-        formRef.current?.reset();
+if (resp.ok && result.success) {
+         setSuccess(true);
+         e.currentTarget.reset();
         if (result.data?.id) { navigate(`/devis/${result.data.id}/confirmation`); }
       } else { setError(result.message || 'Erreur. Veuillez réessayer.'); }
     } catch { setError('Erreur de connexion.'); }
@@ -73,7 +72,7 @@ export default function HeroSection() {
             <h2 className="text-2xl font-bold text-gray-800 mb-1">Obtenez un devis gratuit</h2>
             <p className="text-sm text-gray-500 mb-6">Complétez en 2 minutes</p>
             {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">{error}</div>}
-            <form onSubmit={handleSubmit} noValidate className="space-y-4 flex-1 overflow-y-auto pr-2" ref={formRef}>
+            <form onSubmit={handleSubmit} noValidate className="space-y-4 flex-1 overflow-y-auto pr-2">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div><label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-1.5">Nom *</label><input type="text" id="nom" name="nom" required placeholder="Votre nom" className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none" /></div>
                 <div><label htmlFor="prenom" className="block text-sm font-medium text-gray-700 mb-1.5">Prénom *</label><input type="text" id="prenom" name="prenom" required placeholder="Votre prénom" className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-orange-500 outline-none" /></div>

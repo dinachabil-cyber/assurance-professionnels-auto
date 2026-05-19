@@ -55,15 +55,15 @@ class TestDevisApi:
         data = json.loads(response.data)
         assert data["data"]["id"] == sample_devis.id
 
-    def test_update_devis_status(self, client, sample_devis):
-        """Test updating devis status"""
+    def test_update_devis(self, client, sample_devis):
+        """Test updating devis"""
         response = client.put(
             f"/api/v1/devis/{sample_devis.id}",
-            json={"statut": "en_cours"}
+            json={"notes": "Updated note"}
         )
         assert response.status_code == 200
         data = json.loads(response.data)
-        assert data["data"]["statut"] == "en_cours"
+        assert data["data"]["notes"] == "Updated note"
 
     def test_delete_devis(self, client, sample_devis):
         """Test deleting a devis"""
@@ -117,7 +117,6 @@ def sample_devis(db_session):
         email="john@example.com",
         telephone="0612345678",
         activite="Garagiste",
-        statut="nouveau",
     )
     db_session.add(devis)
     db_session.commit()

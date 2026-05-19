@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'motif_resiliation',
     'email',
     'telephone',
-    'statut',
     'notes',
 ])]
 class LoueurDevi extends Model

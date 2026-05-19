@@ -13,15 +13,27 @@ Route::prefix('v1')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\DevisController::class, 'index']);
         Route::post('/', [\App\Http\Controllers\Api\DevisController::class, 'store']);
         Route::get('/{id}', [\App\Http\Controllers\Api\DevisController::class, 'show']);
-        Route::put('/{id}', [\App\Http\Controllers\Api\DevisController::class, 'update']);
-        Route::delete('/{id}', [\App\Http\Controllers\Api\DevisController::class, 'destroy']);
     });
 
     Route::prefix('garage-devis')->middleware('throttle:devis')->group(function () {
         Route::post('/', [\App\Http\Controllers\Api\GarageDevisController::class, 'store']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\GarageDevisController::class, 'show']);
+        Route::put('/{id}', [\App\Http\Controllers\Api\GarageDevisController::class, 'update']);
     });
 
     Route::prefix('loueur-devis')->middleware('throttle:devis')->group(function () {
         Route::post('/', [\App\Http\Controllers\Api\LoueurDevisController::class, 'store']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\LoueurDevisController::class, 'show']);
+        Route::put('/{id}', [\App\Http\Controllers\Api\LoueurDevisController::class, 'update']);
+    });
+
+    Route::prefix('negociants-devis')->middleware('throttle:devis')->group(function () {
+        Route::post('/', [\App\Http\Controllers\Api\NegociantsDevisController::class, 'store']);
+    });
+
+    Route::prefix('auto-ecole-devis')->middleware('throttle:devis')->group(function () {
+        Route::post('/', [\App\Http\Controllers\Api\AutoEcoleDevisController::class, 'store']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\AutoEcoleDevisController::class, 'show']);
+        Route::put('/{id}', [\App\Http\Controllers\Api\AutoEcoleDevisController::class, 'update']);
     });
 });

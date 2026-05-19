@@ -50,4 +50,59 @@ class GarageDevisController extends Controller
             'data' => $garageDevis,
         ], 201);
     }
+
+    /**
+     * Affiche un devis garage spécifique.
+     */
+    public function show(string $id): JsonResponse
+    {
+        $garageDevis = GarageDevi::with('reponses')->find($id);
+
+        if (!$garageDevis) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Devis non trouvé.',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $garageDevis,
+        ]);
+    }
+
+    /**
+     * Met à jour un devis garage.
+     */
+    public function update(Request $request, string $id): JsonResponse
+    {
+        $garageDevis = GarageDevi::find($id);
+
+        if (!$garageDevis) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Devis non trouvé.',
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'notes' => ['sometimes', 'nullable', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur de validation.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $garageDevis->update($validator->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Devis mis à jour.',
+            'data' => $garageDevis,
+        ]);
+    }
 }

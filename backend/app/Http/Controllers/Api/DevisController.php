@@ -11,17 +11,12 @@ use Illuminate\Validation\Rule;
 
 class DevisController extends Controller
 {
-    /**
-     * Liste les devis (avec pagination et filtres).
-     */
+/**
+      * Liste les devis (avec pagination et filtres).
+      */
     public function index(Request $request): JsonResponse
     {
         $query = Devi::query()->withCount('reponses');
-
-        // Filtres optionnels
-        if ($request->has('statut')) {
-            $query->where('statut', $request->input('statut'));
-        }
 
         if ($request->has('recherche')) {
             $recherche = $request->input('recherche');
@@ -125,7 +120,6 @@ class DevisController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'statut' => ['sometimes', Rule::in(['nouveau', 'en_cours', 'traite', 'refuse', 'accepte'])],
             'notes' => ['sometimes', 'nullable', 'string'],
         ]);
 

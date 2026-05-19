@@ -50,4 +50,59 @@ class LoueurDevisController extends Controller
             'data' => $loueurDevis,
         ], 201);
     }
+
+    /**
+     * Affiche un devis loueur spécifique.
+     */
+    public function show(string $id): JsonResponse
+    {
+        $loueurDevis = LoueurDevi::with('reponses')->find($id);
+
+        if (!$loueurDevis) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Devis non trouvé.',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $loueurDevis,
+        ]);
+    }
+
+    /**
+     * Met à jour un devis loueur.
+     */
+    public function update(Request $request, string $id): JsonResponse
+    {
+        $loueurDevis = LoueurDevi::find($id);
+
+        if (!$loueurDevis) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Devis non trouvé.',
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'notes' => ['sometimes', 'nullable', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur de validation.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $loueurDevis->update($validator->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Devis mis à jour.',
+            'data' => $loueurDevis,
+        ]);
+    }
 }

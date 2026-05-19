@@ -18,9 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'motif_resiliation',
     'email',
     'telephone',
-    'statut',
     'notes',
-])]
+5555])]
 class GarageDevi extends Model
 {
     use HasFactory, SoftDeletes;

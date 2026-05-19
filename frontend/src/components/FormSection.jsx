@@ -1,11 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function FormSection({ onSubmitSuccess }) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const formRef = useRef(null);
 
   const validatePhone = (p) => /^0[1-9]\d{8}$/.test(p.replace(/\s/g, '')) || /^0[67]\d{8}$/.test(p.replace(/\s/g, ''));
   const validateEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
@@ -13,7 +12,7 @@ export default function FormSection({ onSubmitSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true); setError(null);
-    const fd = new FormData(formRef.current);
+    const fd = new FormData(e.currentTarget);
     const data = Object.fromEntries(fd);
 
     if (!data.nom?.trim()) {return setSubmitting(false) || setError('Le nom est requis.');}
@@ -37,9 +36,9 @@ export default function FormSection({ onSubmitSuccess }) {
         }),
       });
       const result = await resp.json();
-      if (resp.ok && result.success) {
-        setSuccess(true);
-        formRef.current?.reset();
+if (resp.ok && result.success) {
+                         setSuccess(true);
+                         e.currentTarget.reset();
         if (onSubmitSuccess && result.data?.id) {onSubmitSuccess(result.data.id);}
       } else { setError(result.message || 'Erreur. Veuillez réessayer.'); }
      } catch { setError('Erreur de connexion.'); }
@@ -61,7 +60,7 @@ export default function FormSection({ onSubmitSuccess }) {
   }
 
   return (
-    <section className="py-16 md:py-20 bg-white" ref={formRef}>
+    <section className="py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           <div className="order-2 lg:order-1">
@@ -80,12 +79,12 @@ export default function FormSection({ onSubmitSuccess }) {
             </div>
           </div>
 
-          <div className="order-1 lg:order-2">
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 sticky top-24">
-              <h3 className="text-lg font-bold text-gray-800 mb-1">Demande de devis</h3>
-              <p className="text-sm text-gray-500 mb-6">Complétez les champs ci-dessous</p>
-              {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700 flex items-center gap-2"><svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>{error}</div>}
-              <form onSubmit={handleSubmit} noValidate className="space-y-4">
+           <div className="order-1 lg:order-2">
+             <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 sticky top-24">
+               <h3 className="text-lg font-bold text-gray-800 mb-1">Demande de devis</h3>
+               <p className="text-sm text-gray-500 mb-6">Complétez les champs ci-dessous</p>
+               {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700 flex items-center gap-2"><svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>{error}</div>}
+               <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div><label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-1.5">Nom <span className="text-red-500">*</span></label><input type="text" id="nom" name="nom" required placeholder="Votre nom" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all" /></div>
                   <div><label htmlFor="prenom" className="block text-sm font-medium text-gray-700 mb-1.5">Prénom <span className="text-red-500">*</span></label><input type="text" id="prenom" name="prenom" required placeholder="Votre prénom" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all" /></div>
