@@ -32,7 +32,7 @@ export default function LoueurVoiturePage() {
             </div>
 
             <div className="w-full lg:w-1/2 order-1 lg:order-2 flex">
-              <div ref={scrollRef} id="loueurForm" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex-1 flex flex-col">
+              <div ref={scrollRef} className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex-1 flex flex-col">
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">Obtenez un devis gratuit</h2>
                 <p className="text-sm text-gray-500 mb-6">Complétez en 2 minutes</p>
                 {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">{error}</div>}
