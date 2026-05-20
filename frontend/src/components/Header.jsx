@@ -1,12 +1,4 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => { setMobileOpen(false); }, [location.pathname]);
-
   return (
     <header className="bg-[#312a8b] sticky top-0 z-50 py-4 shadow-2xl " role="banner">
      <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">

@@ -1,54 +1,8 @@
   import { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { validateFieldSecurity } from '../utils/formSecurity.js';
 
-const BANNED_WORDS = [
-  'bitcoin', 'btc', 'crypto', 'cryptocurrency', 'wallet', 'airdrop', 'ethereum',
-  'litecoin', 'dogecoin', 'nft', 'token', 'coinbase', 'binance', 'blockchain',
-  'mining', 'miner', 'investment', 'profit', 'guaranteed', 'casino', 'poker',
-  'viagra', 'pharmacy', 'loan', 'debt', 'credit', 'mortgage', 'lending'
-];
-
-const URL_PATTERN = /((https?:\/\/)?(www\.)?|[a-z0-9.-]+\.)+[a-z]{2,}(\/\S*)?/i;
-const REPEATED_CHARS = /(.)\1{4,}/i;
-const VALID_TEXT_PATTERN = /^[A-Za-z\u00C0-\u00FF0-9\s.,''-]*$/;
-const EMOJI_PATTERN = /[\u2600-\u26FF\u2700-\u27BF]/;
-
-const validateField = (value, fieldName) => {
-  const errors = [];
-
-  if (!value || !value.trim()) {
-    return { valid: false, errors: [`${fieldName} is required`] };
-  }
-
-  const trimmed = value.trim();
-
-  if (URL_PATTERN.test(trimmed)) {
-    errors.push('Links are not allowed');
-  }
-
-  const lowerValue = trimmed.toLowerCase();
-  const foundBanned = BANNED_WORDS.filter(word => lowerValue.includes(word));
-  if (foundBanned.length > 0) {
-    errors.push('Content contains restricted words');
-  }
-
-  if (REPEATED_CHARS.test(trimmed)) {
-    errors.push('Unusual character repetition detected');
-  }
-
-  if (EMOJI_PATTERN.test(trimmed)) {
-    errors.push('Special characters or emojis are not allowed');
-  }
-
-  if (!VALID_TEXT_PATTERN.test(trimmed)) {
-    errors.push('Only letters, numbers, and basic punctuation allowed');
-  }
-
-  return {
-    valid: errors.length === 0,
-    errors
-  };
-};
+const validateField = validateFieldSecurity;
 
 const SecureContactForm = ({ onSubmit, maxNameLength = 50, maxEmailLength = 100, maxMessageLength = 500 }) => {
   const [formData, setFormData] = useState({
