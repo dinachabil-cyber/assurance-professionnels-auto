@@ -1,4 +1,4 @@
-export default function WhyChooseUs() {
+export default function CTA() {
   return (
     <section className="bg-gradient-to-r from-orange-400 to-orange-500 rounded-3xl p-12 text-center relative overflow-hidden max-w-4xl mx-auto my-16">
       <div className="relative">

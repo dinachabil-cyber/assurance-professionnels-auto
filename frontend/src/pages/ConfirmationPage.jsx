@@ -1,40 +1,65 @@
-import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ConfirmationPage() {
-   useParams();
+  const navigate = useNavigate();
 
-   useEffect(() => {
-    document.title = 'Demande envoyée — Aksam Assurance';
-    window.scrollTo(0, 0);
-  }, []);
+  const goHome = (e) => {
+    e.preventDefault();
+    navigate('/');
+  };
 
   return (
-    <main className="max-w-2xl mx-auto px-4 py-16">
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-12 text-center">
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg className="w-12 h-12 text-green-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-        </div>
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Merci pour votre demande !</h1>
-        <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-lg mx-auto">
-          Votre demande de devis a bien été enregistrée. Un de nos conseillers vous contactera dans les plus brefs délais.
-        </p>
-        <div className="bg-orange-50 rounded-xl p-6 mb-8 text-left">
-          <h3 className="text-sm font-bold text-gray-800 mb-3">Prochaines étapes</h3>
-          <ol className="space-y-2 text-sm text-gray-600 list-decimal list-inside">
-            <li>Un conseiller étudie votre demande</li>
-            <li>Vous recevez un comparatif personnalisé par email</li>
-            <li>Vous choisissez l'offre qui vous convient</li>
-          </ol>
-        </div>
-        <div className="space-y-3">
-          <Link to="/home" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-lg font-bold rounded-xl transition-all shadow-md hover:shadow-lg">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 12h16m-7-7l7 7-7 7" /></svg>
-            Faire une autre demande
-          </Link>
-          <p className="text-sm text-gray-400">Besoin d'aide ? <a href="tel:0182834800" className="text-orange-600 font-medium hover:underline">01 82 83 48 00</a></p>
+    <div className="min-h-screen bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern py-20">
+      <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto bg-surface rounded-3xl shadow-2xl p-12 text-center border border-yellow-200">
+
+          {/* Success Icon */}
+          <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-green-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+            <i className="fas fa-check text-4xl text-white"></i>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl font-bold text-gradient mb-6">
+            Merci pour votre demande !
+          </h1>
+
+          {/* Description */}
+          <p className="text-xl text-gray-700 leading-relaxed mb-8">
+            Votre demande de devis a été enregistrée avec succès.
+            Nos conseillers vont l'analyser et vous contacter
+            dans les plus brefs délais pour vous fournir les meilleures offres
+            d'assurance taxi adaptées à votre situation.
+          </p>
+
+          {/* Contact Box */}
+          <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl p-6 mb-8 border border-yellow-200">
+            <p className="text-gray-800 font-semibold text-lg">
+              Besoin d'une réponse rapide ?
+            </p>
+
+            <p className="text-gray-600 mt-3">
+              Contactez-nous directement au{' '}
+              <a
+                href="tel:0182834800"
+                className="text-orange-500 font-bold hover:text-orange-600 transition-colors"
+              >
+                01 82 83 48 00
+              </a>
+            </p>
+          </div>
+
+          {/* Button */}
+          <a
+            href="/"
+            onClick={goHome}
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-lg font-bold rounded-xl transition-all shadow-md hover:shadow-lg"
+          >
+            <i className="fas fa-arrow-left"></i>
+            Retour à l'accueil
+          </a>
+
         </div>
       </div>
-    </main>
+    </div>
   );
 }

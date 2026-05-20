@@ -67,6 +67,44 @@ a:hover { color: #c2410c; }
 .animate-shimmer { background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%); background-size: 800px 104px; animation: shimmer 2s linear infinite forwards; }
 .animate-slide-in-left { animation: slideInFromLeft 0.4s ease-out; }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating-animation { animation: float 6s ease-in-out infinite; }
+.slide-in-left { animation: slideInFromLeft 0.6s ease-out; }
+.slide-in-right { animation: slideInFromRight 0.6s ease-out; }
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideInFromRight {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.scanlines-bg {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.03) 0px,
+    rgba(0,0,0,0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+.bg-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.03) 0px,
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Outfit', system-ui, sans-serif;
   font-weight: 700;
