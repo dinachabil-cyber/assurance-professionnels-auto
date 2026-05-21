@@ -1,6 +1,7 @@
 import { useState, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { validateFormSecurity } from '../utils/formSecurity.js';
 
 const FormSection = forwardRef(function FormSection({ 
   onSubmitSuccess, 
@@ -15,6 +16,7 @@ const FormSection = forwardRef(function FormSection({
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [securityErrors, setSecurityErrors] = useState({});
 
   const validatePhone = (p) => /^0[1-9]\d{8}$/.test(p.replace(/\s/g, '')) || /^0[67]\d{8}$/.test(p.replace(/\s/g, ''));
   const validateEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
@@ -24,14 +26,29 @@ const FormSection = forwardRef(function FormSection({
     const form = e.currentTarget;
     setSubmitting(true);
     setError(null);
+    setSecurityErrors({});
     const fd = new FormData(form);
     const data = Object.fromEntries(fd);
 
+    // Security validation for text fields (nom, prenom, raison_sociale, activite)
+    const securityFields = {
+      nom: data.nom,
+      prenom: data.prenom,
+      raison_sociale: data.raison_sociale,
+      activite: data.activite,
+    };
+    const securityResult = validateFormSecurity(securityFields);
+    if (!securityResult.valid) {
+      setSecurityErrors(securityResult.errors);
+      return setSubmitting(false) || setError('Veuillez corriger les champs invalides.');
+    }
+
     if (!data.nom?.trim()) {return setSubmitting(false) || setError('Le nom est requis.');}
     if (!data.prenom?.trim()) {return setSubmitting(false) || setError('Le prénom est requis.');}
-    if (data.email && !validateEmail(data.email)) {return setSubmitting(false) || setError('Email invalide.');}
-    if (data.tele && !validatePhone(data.tele)) {return setSubmitting(false) || setError('Téléphone invalide (10 chiffres).');}
-    if (!data.email && !data.tele) {return setSubmitting(false) || setError('Email ou téléphone requis.');}
+    if (!data.email?.trim()) {return setSubmitting(false) || setError('L\'email est requis.');}
+    if (!data.tele?.trim()) {return setSubmitting(false) || setError('Le téléphone est requis.');}
+    if (!validateEmail(data.email)) {return setSubmitting(false) || setError('Email invalide.');}
+    if (!validatePhone(data.tele)) {return setSubmitting(false) || setError('Téléphone invalide (10 chiffres).');}
 
     const bodyData = {
       nom: data.nom.trim(),
@@ -43,8 +60,8 @@ const FormSection = forwardRef(function FormSection({
       ancienne: data.ancienne || null,
       motif_resiliation: data.motif || null,
       code_postal: data.code?.trim() || null,
-      email: data.email?.trim() || null,
-      telephone: data.tele?.trim() || null,
+      email: data.email.trim(),
+      telephone: data.tele.trim(),
     };
 
     try {

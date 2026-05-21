@@ -57,12 +57,14 @@ class DevisController extends Controller
             'ancienne' => ['nullable', Rule::in(['OUI', 'NON'])],
             'motif_resiliation' => ['nullable', 'string', 'in:Sinistre,Non paiement,Amiable,Échéance'],
             'code_postal' => ['nullable', 'string', 'regex:/^[0-9]{5}$/'],
-            'email' => ['nullable', 'email', 'max:255'],
-            'telephone' => ['nullable', 'string', 'regex:/^0[1-9][0-9]{8}$/'],
+            'email' => ['required', 'email', 'max:255'],
+            'telephone' => ['required', 'string', 'regex:/^0[1-9][0-9]{8}$/'],
         ], [
             'nom.required' => 'Le nom est obligatoire.',
             'prenom.required' => 'Le prénom est obligatoire.',
+            'email.required' => 'L\'email est obligatoire.',
             'email.email' => 'Veuillez saisir un email valide.',
+            'telephone.required' => 'Le téléphone est obligatoire.',
             'telephone.regex' => 'Le numéro de téléphone est invalide.',
             'code_postal.regex' => 'Le code postal doit contenir 5 chiffres.',
         ]

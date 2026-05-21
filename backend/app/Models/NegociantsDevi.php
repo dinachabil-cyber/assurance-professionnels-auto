@@ -15,6 +15,7 @@ class NegociantsDevi extends Model
 {
     use HasFactory;
     protected $table = 'negociants_devis';
+    const UPDATED_AT = null;
 
     public function reponses(): HasMany
     {

@@ -8,6 +8,7 @@ const BANNED_WORDS = [
 const URL_PATTERN = /(https?:\/\/|www\.)[^\s]+/i;
 const REPEATED_CHARS = /(.)\1{4,}/i;
 const VALID_TEXT_PATTERN = /^[A-Za-z\u00C0-\u00FF0-9\s.,''-]*$/;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const EMOJI_PATTERN = /[\u2600-\u26FF\u2700-\u27BF]/;
 
 export const validateFieldSecurity = (value, fieldName) => {
@@ -18,27 +19,42 @@ export const validateFieldSecurity = (value, fieldName) => {
   }
 
   const trimmed = value.trim();
+  const isEmail = fieldName.toLowerCase() === 'email' || trimmed.includes('@');
 
-  if (URL_PATTERN.test(trimmed)) {
-    errors.push('Links are not allowed');
-  }
+  if (isEmail) {
+    if (!EMAIL_PATTERN.test(trimmed)) {
+      errors.push('Invalid email format');
+    }
+    if (URL_PATTERN.test(trimmed)) {
+      errors.push('Links are not allowed');
+    }
+    const lowerValue = trimmed.toLowerCase();
+    const foundBanned = BANNED_WORDS.filter(word => lowerValue.includes(word));
+    if (foundBanned.length > 0) {
+      errors.push('Content contains restricted words');
+    }
+  } else {
+    if (URL_PATTERN.test(trimmed)) {
+      errors.push('Links are not allowed');
+    }
 
-  const lowerValue = trimmed.toLowerCase();
-  const foundBanned = BANNED_WORDS.filter(word => lowerValue.includes(word));
-  if (foundBanned.length > 0) {
-    errors.push('Content contains restricted words');
-  }
+    const lowerValue = trimmed.toLowerCase();
+    const foundBanned = BANNED_WORDS.filter(word => lowerValue.includes(word));
+    if (foundBanned.length > 0) {
+      errors.push('Content contains restricted words');
+    }
 
-  if (REPEATED_CHARS.test(trimmed)) {
-    errors.push('Unusual character repetition detected');
-  }
+    if (REPEATED_CHARS.test(trimmed)) {
+      errors.push('Unusual character repetition detected');
+    }
 
-  if (EMOJI_PATTERN.test(trimmed)) {
-    errors.push('Special characters or emojis are not allowed');
-  }
+    if (EMOJI_PATTERN.test(trimmed)) {
+      errors.push('Special characters or emojis are not allowed');
+    }
 
-  if (!VALID_TEXT_PATTERN.test(trimmed)) {
-    errors.push('Only letters, numbers, and basic punctuation allowed');
+    if (!VALID_TEXT_PATTERN.test(trimmed)) {
+      errors.push('Only letters, numbers, and basic punctuation allowed');
+    }
   }
 
   return {
@@ -68,4 +84,4 @@ export const validateFormSecurity = (formData) => {
   return { valid: isValid, errors };
 };
 
-export { BANNED_WORDS, URL_PATTERN, REPEATED_CHARS, VALID_TEXT_PATTERN, EMOJI_PATTERN };
+export { BANNED_WORDS, URL_PATTERN, REPEATED_CHARS, VALID_TEXT_PATTERN, EMOJI_PATTERN, EMAIL_PATTERN };

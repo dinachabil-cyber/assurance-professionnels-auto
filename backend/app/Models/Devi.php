@@ -7,15 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Fillable([
+    'nom', 'prenom', 'raison_sociale', 'activite', 'demarrage',
+    'assure', 'ancienne', 'motif_resiliation', 'code_postal', 'email', 'telephone',
+])]
 class Devi extends Model
 {
     use HasFactory;
 
     protected $table = 'devis';
+    public $timestamps = true;
+    const UPDATED_AT = null;
 
-    /**
-     * Les réponses de devis associées.
-     */
     public function reponses(): HasMany
     {
         return $this->hasMany(DeviReponse::class, 'devis_id');

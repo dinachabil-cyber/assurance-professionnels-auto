@@ -15,6 +15,7 @@ class AutoEcoleDevi extends Model
 {
     use HasFactory;
     protected $table = 'auto_ecole_devis';
+    const UPDATED_AT = null;
 
     public function reponses(): HasMany
     {
