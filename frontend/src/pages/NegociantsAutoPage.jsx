@@ -24,7 +24,7 @@ export default function NegociantsAutoPage() {
         <div className="absolute top-10 left-10 floating-animation"><i className="fas fa-car text-orange-400 text-6xl opacity-30"></i></div>
         <div className="absolute bottom-10 right-10 floating-animation" style={{ animationDelay: '-2s' }}><i className="fas fa-shield-alt text-orange-500 text-8xl opacity-25"></i></div>
 
-        <div className="max mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max mx-auto sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
             <div className="w-full lg:w-1/2 order-2 lg:order-1 flex">
               <div className="relative w-full h-full min-h-[400px]">
@@ -52,27 +52,63 @@ export default function NegociantsAutoPage() {
         </div>
       </section>
 
+      {/* Section 1 - Définition */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Qu'est-ce qu'une assurance pour négociants automobiles ?</h2>
-          <p className="text-gray-600 text-lg leading-relaxed">Une assurance pour négociants automobiles est une police d'assurance spécialement conçue pour couvrir les besoins des professionnels du commerce de véhicules (neufs et d'occasion). Elle protège contre les risques liés à l'achat, la vente et l'importation de véhicules.</p>
+        <div className="max-w-3xl mx-auto sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Assurance négociants automobiles</h2>
+          <h3 className="text-xl font-semibold text-gray-700 mb-4">Définition</h3>
+          <p className="text-gray-600 text-lg leading-relaxed">
+            Une assurance pour négociant automobile est une police d'assurance spécialement conçue pour couvrir les besoins et les risques associés à l'activité des professionnels du commerce de véhicules automobiles. Les négociants automobiles achètent, vendent ou importent des véhicules, souvent en grande quantité, et nécessitent une couverture adaptée à leur activité.
+          </p>
         </div>
       </section>
 
+      {/* Section 2 - Garanties */}
       <section className="py-20 md:py-28 bg-white" id="garanties">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Les garanties RC Pro pour négociants automobiles</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">Découvrez les protections adaptées à votre activité de négoce automobile.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Garanties assurance RC négociants automobiles</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+              Les garanties incluses dans une assurance négociants automobiles peuvent couvrir :
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
-              { icon: '🤝', title: 'Négociants Spécialisés', desc: 'Couverture RC Pro adaptée aux professionnels du commerce de véhicules neufs et d\'occasion.' },
-              { icon: '🛡️', title: 'Responsabilité Civile Professionnelle', desc: 'Couvre les dommages causés à des tiers (clients, fournisseurs) dans le cadre de votre activité de négoce.' },
-              { icon: '🚗', title: 'Assurance Véhicules en Stock', desc: 'Protège les véhicules destinés à la vente contre le vol, l\'incendie et le vandalisme.' },
-              { icon: '🏢', title: 'Garantie des Locaux', desc: 'Couverture de votre showroom, atelier et bureaux contre l\'incendie, le vol et les dégâts des eaux.' },
-              { icon: '⚡', title: 'Gestion Rapide des Sinistres', desc: 'Réactivité et accompagnement pour assurer la continuité de votre activité commerciale.' },
-              { icon: '💰', title: 'Tarifs Compétitifs', desc: 'Des solutions sur-mesure adaptées au volume de votre parc et à votre budget.' },
+              {
+                icon: '🛡️',
+                title: 'Responsabilité Civile Professionnelle',
+                desc: 'Couvre les dommages causés à des tiers (clients, fournisseurs, etc.) dans le cadre de l\'activité.',
+              },
+              {
+                icon: '🏢',
+                title: 'Garantie des locaux',
+                desc: 'Protège les locaux professionnels (showroom, atelier, bureaux) contre des risques tels que l\'incendie, le vol, ou les dégâts des eaux.',
+              },
+              {
+                icon: '🚗',
+                title: 'Assurance des véhicules en stock',
+                desc: 'Protège les véhicules destinés à la vente contre les sinistres tels que le vol, les incendies, ou les actes de vandalisme.',
+              },
+              {
+                icon: '🚐',
+                title: 'Assurance flotte automobile',
+                desc: 'Couvre les véhicules utilisés par l\'entreprise, qu\'ils soient destinés au transport, aux essais routiers, ou au service après-vente.',
+              },
+              {
+                icon: '⚖️',
+                title: 'Protection juridique',
+                desc: 'Offre une assistance et une couverture financière en cas de litige avec un client, un fournisseur, ou une administration.',
+              },
+              {
+                icon: '🔑',
+                title: 'Assurance pour les essais et démonstrations',
+                desc: 'Couvre les risques liés à l\'utilisation des véhicules par les clients potentiels lors d\'essais routiers.',
+              },
+              {
+                icon: '💰',
+                title: 'Perte d\'exploitation',
+                desc: 'Indemnise les pertes financières liées à une interruption d\'activité causée par un sinistre couvert.',
+              },
             ].map((g, i) => (
               <div key={g.title} className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-orange-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" style={{ animationDelay: `${i * 80}ms` }}>
                 <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform">{g.icon}</div>
@@ -84,25 +120,24 @@ export default function NegociantsAutoPage() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-16">
-        <section className="bg-gradient-to-r from-orange-400 to-orange-500 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
-          <div className="relative">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Devis assurance négociant automobile</h2>
-            <p className="text-base mb-8 text-gray-800/80 max-w-xl mx-auto leading-relaxed">Pour obtenir un devis RC Pro négociant automobile, complétez le formulaire en haut de la page. Simple et rapide, obtenez votre devis en ligne et en quelques clics.</p>
+      {/* Section 3 - Devis */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 my-16 text-center">
+        <h2 className="text-2xl font-bold mb-4">Devis assurance négociants automobiles</h2>
+        <p className="text-base text-gray-600">
+          Pour obtenir un devis assurance négociants automobiles, veuillez compléter le formulaire en haut de la page. Simple et rapide, obtenez votre devis en ligne et en quelques clics.
+        </p>
+      </section>
 
-<div className="text-center">
-         <Link
-           to="/"
-           className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
-         >
-           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-           </svg>
-           Retour à l'accueil
-         </Link>
-         </div>
-       </div>
-        </section>
+      <div className="flex justify-center my-12">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+        >
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Retour à l'accueil
+        </Link>
       </div>
     </>
   );

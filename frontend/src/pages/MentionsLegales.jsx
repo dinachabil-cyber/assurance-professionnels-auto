@@ -8,7 +8,7 @@ export default function MentionsLegales() {
         <title>Mentions légales - Aksam Assurance</title>
         <meta name="description" content="Mentions légales du site assurance-professionnels-auto.fr." />
       </Helmet>
-      <main className="max-w-4xl mx-auto px-4 py-16">
+      <main className="max-w-4xl mx-auto py-16">
         <article className="prose prose-lg max-w-none">
           <header className="mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Mentions légales</h1>
@@ -132,24 +132,23 @@ export default function MentionsLegales() {
               Site internet : <a href="https://www.mediation-planetecourtier.com" className="text-orange-600 hover:underline" target="_blank" rel="noreferrer">www.mediation-planetecourtier.com</a>
             </p>
 <p className="text-gray-600 mt-2">
-               Les documents en lien avec votre réclamation sont conservés cinq ans à compter de la date de réception.
-             </p>
-             
-             <div className="text-center">
-             <Link
-               to="/"
-               className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
-             >
-               <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                 <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-               </svg>
-               Retour à l'accueil
-             </Link>
-             </div>
-          </section>
-        </article>
-      </main>
-      
+                Les documents en lien avec votre réclamation sont conservés cinq ans à compter de la date de réception.
+              </p>
+            </section>
+          </article>
+        </main>
+        
+        <div className="flex justify-center my-12">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+          >
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Retour à l'accueil
+          </Link>
+        </div>
     </>
   );
 }

@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <header className="bg-[#312a8b] sticky top-0 z-50 py-4 shadow-2xl" role="banner">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max mx-auto sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
 
           {/* LEFT SECTION → hidden on mobile */}

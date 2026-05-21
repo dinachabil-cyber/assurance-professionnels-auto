@@ -12,11 +12,31 @@ export default function AutoEcolePage() {
   };
 
   const guarantees = [
-    { icon: '🛡️', title: 'Responsabilité civile professionnelle', desc: 'Couvre les dommages corporels, matériels et immatériels causés aux tiers (élèves, piétons, autres conducteurs) lors des leçons de conduite.' },
-    { icon: '🚗', title: 'Assurance des véhicules', desc: 'Protège les véhicules de l\'auto-école contre les dommages, vol et vandalisme, ainsi que les dommages causés aux autres véhicules.' },
-    { icon: '👨‍🏫', title: 'Protection des instructeurs', desc: 'Couvre les moniteurs en cas de blessure ou de dommages subis pendant l\'exercice de leur activité, y compris en cas de faute de l\'élève.' },
-    { icon: '👨‍🎓', title: 'Garantie des élèves conducteurs', desc: 'Protège les élèves pendant les leçons de conduite, même si ceux-ci sont encore en phase d\'apprentissage et pas en possession d\'un permis.' },
-    { icon: '🏢', title: 'Garantie des locaux', desc: 'Couvre les locaux de l\'auto-école contre les risques comme l\'incendie, le vol ou les dégâts des eaux.' },
+    {
+      icon: '🛡️',
+      title: 'Responsabilité civile professionnelle (RC Pro)',
+      desc: 'Couvre les dommages corporels, matériels et immatériels causés aux tiers (élèves, piétons, autres conducteurs, etc.) lors des leçons de conduite. Par exemple, si un élève cause un accident pendant un cours, la responsabilité civile de l\'auto-école est engagée.',
+    },
+    {
+      icon: '🚗',
+      title: 'Assurance des véhicules',
+      desc: 'Les véhicules de l\'auto-école doivent être couverts par une assurance spécifique, car ils sont utilisés dans un cadre d\'apprentissage. Cette garantie prend en charge les dommages causés aux véhicules de l\'auto-école en cas d\'accident, de vol ou de vandalisme, ainsi que les dommages causés aux autres véhicules ou biens.',
+    },
+    {
+      icon: '👨‍🏫',
+      title: 'Protection des instructeurs',
+      desc: 'Cette garantie couvre les moniteurs en cas de blessure ou de dommages subis pendant l\'exercice de leur activité, y compris en cas de faute de l\'élève.',
+    },
+    {
+      icon: '👨‍🎓',
+      title: 'Garantie des élèves conducteurs',
+      desc: 'Comme les élèves n\'ont pas encore de permis, ils sont particulièrement exposés au risque d\'accidents. L\'assurance auto-école couvre ces risques pendant les leçons de conduite, même si l\'élève est responsable de l\'accident.',
+    },
+    {
+      icon: '🏢',
+      title: 'Garantie des locaux',
+      desc: 'Si l\'auto-école dispose de locaux (pour la théorie ou l\'administration), ils peuvent être couverts contre les risques comme l\'incendie, le vol ou les dégâts des eaux.',
+    },
   ];
 
   return (
@@ -32,12 +52,15 @@ export default function AutoEcolePage() {
         <div className="absolute top-10 left-10 floating-animation"><i className="fas fa-car text-orange-400 text-6xl opacity-30"></i></div>
         <div className="absolute bottom-10 right-10 floating-animation" style={{ animationDelay: '-2s' }}><i className="fas fa-shield-alt text-orange-500 text-8xl opacity-25"></i></div>
 
-        <div className="max mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max mx-auto sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
             <div className="w-full lg:w-1/2 order-2 lg:order-1 flex">
               <div className="relative w-full h-full min-h-[400px]">
-                <img src="https://assurance-professionnels-auto.fr/image/photautoecole.png" alt="Assurance RC Pro auto-école" className="absolute inset-0 w-full h-full object-cover" />
-              </div>
+<img
+  src="https://assurance-professionnels-auto.fr/image/photautoecole.png"
+  alt="Assurance RC Pro auto-école"
+  className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl"
+/>              </div>
             </div>
 
             <div className="w-full lg:w-1/2 order-1 lg:order-2 flex">
@@ -59,18 +82,25 @@ export default function AutoEcolePage() {
         </div>
       </section>
 
+      {/* Section 1 - Définition */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Qu'est-ce qu'une assurance pour auto-école ?</h2>
-          <p className="text-gray-600 text-lg leading-relaxed">L'assurance auto-école est une couverture spécialement conçue pour les professionnels qui exploitent une auto-école et dispensent des cours de conduite. Ce type d'assurance est essentiel pour couvrir les risques spécifiques liés à l'enseignement de la conduite, à la fois pour le matériel (les véhicules de l'auto-école) et pour les élèves, instructeurs et tiers.</p>
+        <div className="max-w-3xl mx-auto sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Assurance auto-école</h2>
+          <h3 className="text-xl font-semibold text-gray-700 mb-6">Définition</h3>
+          <p className="text-gray-600 text-lg leading-relaxed">
+            L'assurance auto-école est une couverture spécialement conçue pour les professionnels qui exploitent une auto-école et dispensent des cours de conduite. Ce type d'assurance est essentiel pour couvrir les risques spécifiques liés à l'enseignement de la conduite, à la fois pour le matériel (les véhicules de l'auto-école) et pour les élèves, instructeurs et tiers.
+          </p>
         </div>
       </section>
 
+      {/* Section 2 - Garanties */}
       <section className="py-20 md:py-28 bg-white" id="garanties">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Les garanties RC PRO pour auto-école</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">Découvrez les protections essentielles pour votre activité d'auto-école.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Garanties assurance auto-école</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+              Les garanties incluses dans une assurance auto-école peuvent couvrir :
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {guarantees.map((g) => (
@@ -81,30 +111,33 @@ export default function AutoEcolePage() {
               </div>
             ))}
           </div>
+
+          {/* Summary paragraph */}
+          <p className="mt-12 text-center text-gray-600 text-base max-w-3xl mx-auto leading-relaxed">
+            En résumé, l'assurance auto-école offre une protection complète pour les risques spécifiques liés à l'enseignement de la conduite, incluant à la fois la responsabilité des moniteurs, la sécurité des élèves, ainsi que la protection des véhicules et des locaux de l'auto-école.
+          </p>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-16">
-        <section className="bg-gradient-to-r from-orange-400 to-orange-500 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
-          <div className="relative">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Devis assurance auto-école</h2>
-            <p className="text-base mb-8 text-gray-800/80 max-w-xl mx-auto leading-relaxed">Pour obtenir un devis RC PRO auto-école, complétez le formulaire en haut de la page. Simple et rapide, obtenez votre devis en ligne et en quelques clics.</p>
+      {/* Section 3 - Devis */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 my-16 text-center">
+        <h2 className="text-2xl font-bold mb-4">Devis assurance auto-école</h2>
+        <p className="text-base text-gray-600">
+          Pour obtenir un devis assurance auto-école, veuillez compléter le formulaire en haut de la page. Simple et rapide, obtenez votre devis en ligne et en quelques clics.
+        </p>
+      </section>
 
-<div className="text-center">
-         <Link
-           to="/"
-           className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
-         >
-           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-           </svg>
-           Retour à l'accueil
-         </Link>
-         </div>
-       </div>
-        </section>
+      <div className="flex justify-center my-12">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+        >
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Retour à l'accueil
+        </Link>
       </div>
-
     </>
   );
 }

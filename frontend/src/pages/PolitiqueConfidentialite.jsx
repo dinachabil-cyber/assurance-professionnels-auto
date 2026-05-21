@@ -9,7 +9,7 @@ export default function PolitiqueConfidentialite() {
         <title>Politique de confidentialité - Aksam Assurance</title>
         <meta name="description" content="Consultez notre politique de confidentialité pour connaître l'utilisation de vos données personnelles." />
       </Helmet>
-      <main className="max-w-4xl mx-auto px-4 py-16">
+      <main className="max-w-4xl mx-auto py-16">
         <article className="prose prose-lg max-w-none">
           <header className="mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-6">Politique de confidentialité</h1>
@@ -245,29 +245,29 @@ export default function PolitiqueConfidentialite() {
               contact@aksam-assurances.fr ou par courrier papier à l'adresse : Aksam ASSURANCES – 10 rue de Penthièvre 75008
               PARIS, France, en justifiant de votre identité et d'un motif légitime lorsque celui-ci est exigé par la loi.
             </p>
-            <p className="text-gray-600 leading-relaxed mb-4">
-              Il est rappelé que AKSAM ASSURANCES dispose d'un délai légal de 2 mois pour répondre à votre demande. Cependant,
-              nous mettons tout en œuvre pour respecter un délai maximum de 15 jours ouvrés suite à la réception de votre demande.
-            </p>
 <p className="text-gray-600 leading-relaxed mb-4">
-              Conformément à la loi 2014-344 du 17 mars 2014 relative à la consommation, vous disposez également d'un droit
-              d'opposition au démarchage téléphonique en vous inscrivant gratuitement sur la liste d'opposition Bloctel.
-            </p>
-            
-            <div className="text-center">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
-            >
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Retour à l'accueil
-            </Link>
-            </div>
-          </section>
-        </article>
-      </main>
+               Il est rappelé que AKSAM ASSURANCES dispose d'un délai légal de 2 mois pour répondre à votre demande. Cependant,
+               nous mettons tout en œuvre pour respecter un délai maximum de 15 jours ouvrés suite à la réception de votre demande.
+             </p>
+<p className="text-gray-600 leading-relaxed mb-4">
+                Conformément à la loi 2014-344 du 17 mars 2014 relative à la consommation, vous disposez également d'un droit
+                d'opposition au démarchage téléphonique en vous inscrivant gratuitement sur la liste d'opposition Bloctel.
+              </p>
+            </section>
+          </article>
+        </main>
+
+        <div className="flex justify-center my-12">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+          >
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Retour à l'accueil
+          </Link>
+        </div>
     </>
   );
 }

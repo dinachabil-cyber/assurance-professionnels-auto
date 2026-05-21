@@ -104,9 +104,13 @@ const FormSection = forwardRef(function FormSection({
         <div className="max-w mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
            <div className="w-full lg:w-1/2 order-2 lg:order-1 flex">
-  <div className="relative w-full h-full min-h-[400px]">
-    <img src={imageUrl} alt="Véhicule professionnel" className="absolute inset-0 w-full h-full object-cover" />
-  </div>
+  <div className="relative w-full h-full min-h-[400px] border-2 border-gray-200 rounded-xl overflow-hidden">
+  <img
+    src={imageUrl}
+    alt="Véhicule professionnel"
+    className="absolute inset-0 w-full h-full object-cover"
+  />
+</div>
 </div>
             <div className="w-full lg:w-1/2 order-1 lg:order-2 flex">
               <div className="flex-1">

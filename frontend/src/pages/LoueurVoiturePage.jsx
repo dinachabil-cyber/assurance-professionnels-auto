@@ -12,6 +12,47 @@ export default function LoueurVoiturePage() {
   const scrollToForm = () => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+const sections = [
+    {
+      icon: "🚗",
+      title: "Une couverture sur-mesure pour votre entreprise de location de véhicules",
+      desc: [
+        "Vous êtes loueur de véhicules courte ou longue durée et recherchez une assurance fiable et compétitive ?",
+        "Ne laissez rien au hasard !",
+        "Protégez votre flotte et votre activité avec une assurance spécialement conçue pour les professionnels de la location automobile."
+      ]
+    },
+    {
+      icon: "🏗️",
+      title: "Garantie RC PRO location voiture",
+      desc: [
+        "Les garanties principales incluent souvent :",
+        "✔ Assurance complète : couverture tous risques, responsabilité civile, dommages aux véhicules",
+        "✔ Protection financière : garantie perte d’exploitation, vol, vandalisme"
+      ]
+    },
+    {
+      icon: "⭐",
+      title: "Pourquoi choisir notre assurance pour loueurs de véhicules ?",
+      desc: [
+        "Spécialiste du secteur automobile : nous connaissons les besoins spécifiques des professionnels de la location",
+        "Tarifs compétitifs : des solutions sur-mesure adaptées à votre budget",
+        "Accompagnement personnalisé : un expert dédié pour vous conseiller et gérer vos contrats",
+        "Gestion rapide des sinistres : réactivité et efficacité pour assurer la continuité de votre activité"
+      ]
+    },
+    {
+      icon: "📄",
+      title: "Obtenez votre devis gratuit en quelques clics !",
+      desc: [
+        "Pour obtenir un devis assurance pour loueur automobile, veuillez compléter le formulaire à droite de la page.",
+        "Simple et rapide : obtenez votre devis en ligne en quelques clics.",
+        "✔ Un conseiller dédié à votre écoute",
+        "✔ Réponse et devis en ligne",
+        "✔ Comparez & souscrivez rapidement pour protéger votre flotte en toute sérénité"
+      ]
+    }
+  ];
 
   return (
     <>
@@ -26,7 +67,7 @@ export default function LoueurVoiturePage() {
         <div className="absolute top-10 left-10 floating-animation"><i className="fas fa-car text-orange-400 text-6xl opacity-30"></i></div>
         <div className="absolute bottom-10 right-10 floating-animation" style={{ animationDelay: '-2s' }}><i className="fas fa-shield-alt text-orange-500 text-8xl opacity-25"></i></div>
 
-        <div className="max mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max mx-auto sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
             <div className="w-full lg:w-1/2 order-2 lg:order-1 flex">
               <div className="relative w-full h-full min-h-[400px]">
@@ -53,53 +94,61 @@ export default function LoueurVoiturePage() {
           </div>
         </div>
       </section>
+  <section className="py-20 md:py-28 bg-white">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-      <section className="py-20 md:py-28 bg-white" id="garanties">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Les avantages de l'assurance RC PRO pour loueurs</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">Découvrez les protections essentielles pour votre activité de garagiste.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Assurance loueur de véhicules
+            </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {[
-              { icon: '🛡️', title: 'RC Pro Garagiste', desc: 'Couvre les dommages matériels, immatériels et corporels causés à des tiers dans le cadre de votre activité.' },
-              { icon: '🏗️', title: 'Responsabilité Civile d\'Exploitation', desc: 'Protège contre les dommages causés dans le cadre de l\'exploitation du loueur (chute d\'un client, etc.).' },
-              { icon: '🚗', title: 'Véhicules Confiés', desc: 'Couverture pour les véhicules appartenant aux clients pendant leur garde au loueur.' },
-              { icon: '🔧', title: 'Biens Professionnels', desc: 'Protège vos locaux, équipements et outils contre incendie, vol et dégâts des eaux.' },
-              { icon: '⚖️', title: 'Protection Juridique', desc: 'Assistance et couverture financière en cas de litige avec un client ou fournisseur.' },
-              { icon: '💰', title: 'Perte d\'Exploitation', desc: 'Indemnise les pertes financières liées à une interruption d\'activité suite à un sinistre.' },
-            ].map((g, i) => (
-              <div key={g.title} className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-orange-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" style={{ animationDelay: `${i * 80}ms` }}>
-                <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform">{g.icon}</div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-orange-600 transition-colors">{g.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{g.desc}</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {sections.map((item, index) => (
+              <div
+                key={index}
+                className="p-6 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-2xl">{item.icon}</span>
+                  <h3 className="text-lg font-bold text-gray-800">
+                    {item.title}
+                  </h3>
+                </div>
+
+                <div className="space-y-2">
+                  {item.desc.map((line, i) => (
+                    <p key={i} className="text-sm text-gray-600 leading-relaxed">
+                      {line}
+                    </p>
+                  ))}
+                </div>
               </div>
             ))}
+
           </div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-16">
-        <section className="bg-gradient-to-r from-orange-400 to-orange-500 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
-          <div className="relative">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Devis assurance garagiste.</h2>
-            <p className="text-base mb-8 text-gray-800/80 max-w-xl mx-auto leading-relaxed">Pour obtenir un devis RCPRO garagiste veuillez compléter le formulaire à droite de la page. Simple et rapide obtenez votre devis en ligne et en quelques clics.</p>
-        
-<div className="text-center">
-         <Link
-           to="/"
-           className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
-         >
-           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-           </svg>
-           Retour à l'accueil
-         </Link>
-         </div>
-       </div>
-        </section>
-              
+    
+
+<section className="max-w-3xl mx-auto sm:px-6 lg:px-8 my-16 text-center">
+        <h2 className="text-2xl font-bold mb-4">Devis assurance loueur de voiture</h2>
+        <p className="text-base">Pour obtenir un devis RC PRO loueur de voiture, complétez le formulaire en haut de la page. Simple et rapide, obtenez votre devis en ligne et en quelques clics.</p>
+      </section>
+
+      <div className="flex justify-center my-12">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+        >
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Retour à l'accueil
+        </Link>
       </div>
-     </>
+    </>
   );
 }

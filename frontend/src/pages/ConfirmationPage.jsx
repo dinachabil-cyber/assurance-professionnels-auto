@@ -1,16 +1,9 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function ConfirmationPage() {
-  const navigate = useNavigate();
-
-  const goHome = (e) => {
-    e.preventDefault();
-    navigate('/');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern py-20">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="max-w-2xl mx-auto bg-surface rounded-3xl shadow-2xl p-12 text-center border border-yellow-200">
 
           {/* Success Icon */}
@@ -52,14 +45,15 @@ export default function ConfirmationPage() {
           </div>
 
           {/* Button */}
-          <a
-            href="/"
-            onClick={goHome}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-lg font-bold rounded-xl transition-all shadow-md hover:shadow-lg"
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
           >
-            <i className="fas fa-arrow-left"></i>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             Retour à l'accueil
-          </a>
+          </Link>
 
         </div>
       </div>

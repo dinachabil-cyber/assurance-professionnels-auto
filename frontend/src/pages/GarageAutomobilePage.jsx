@@ -25,7 +25,7 @@ export default function GarageAutomobilePage() {
         <div className="absolute top-10 left-10 floating-animation"><i className="fas fa-car text-orange-400 text-6xl opacity-30"></i></div>
         <div className="absolute bottom-10 right-10 floating-animation" style={{ animationDelay: '-2s' }}><i className="fas fa-shield-alt text-orange-500 text-8xl opacity-25"></i></div>
 
-        <div className="max mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max mx-auto sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
             <div className="w-full lg:w-1/2 order-2 lg:order-1 flex">
               <div className="relative w-full h-full min-h-[400px]">
@@ -54,8 +54,12 @@ export default function GarageAutomobilePage() {
       </section>
 
       <section className="py-20 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Qu'est-ce qu'une assurance pour garage automobile ?</h2>
+        <div className="max-w-3xl mx-auto sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">I- Assurance garage automobile
+</h2>
+  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">1- Définition
+</h2>
+
           <p className="text-gray-600 text-lg leading-relaxed">Une assurance pour l'activité de garagiste est une couverture spécialement conçue pour les professionnels du secteur automobile qui exploitent des garages ou tout autre établissement proposant des services liés à la réparation des véhicules. Elle vise à protéger le garagiste contre les risques spécifiques à son activité et à couvrir les responsabilités, les biens, ainsi que les véhicules confiés par ses clients.</p>
         </div>
       </section>
@@ -63,7 +67,7 @@ export default function GarageAutomobilePage() {
       <section className="py-20 md:py-28 bg-white" id="garanties">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Les garanties RC PRO pour garage automobile</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">2- Garantie RC PRO garage automobile</h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">Découvrez les protections essentielles pour votre activité de garagiste.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -85,25 +89,22 @@ export default function GarageAutomobilePage() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-16">
-        <section className="bg-gradient-to-r from-orange-400 to-orange-500 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
-          <div className="relative">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Devis assurance garagiste</h2>
-            <p className="text-base mb-8 text-gray-800/80 max-w-xl mx-auto leading-relaxed">Pour obtenir un devis RC PRO garagiste, complétez le formulaire en haut de la page. Simple et rapide, obtenez votre devis en ligne et en quelques clics.</p>
+<section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 my-16 text-center">
+                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+Devis assurance garagiste</h2>
+        <p className="text-base">Pour obtenir un devis RC PRO garagiste, complétez le formulaire en haut de la page. Simple et rapide, obtenez votre devis en ligne et en quelques clics.</p>
+      </section>
 
-<div className="text-center">
-         <Link
-           to="/"
-           className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
-         >
-           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-           </svg>
-           Retour à l'accueil
-         </Link>
-         </div>
-       </div>
-        </section>
+      <div className="flex justify-center my-12">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+        >
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Retour à l'accueil
+        </Link>
       </div>
     </>
   );
