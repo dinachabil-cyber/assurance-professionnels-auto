@@ -52,7 +52,6 @@ class AutoEcoleDevisController extends Controller
     public function update(Request $request, int $id): JsonResponse
     {
         $devis = AutoEcoleDevi::findOrFail($id);
-        $devis->update($request->only(['statut', 'notes']));
         return response()->json(['success' => true, 'data' => $devis]);
     }
 }

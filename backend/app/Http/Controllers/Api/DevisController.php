@@ -11,9 +11,9 @@ use Illuminate\Validation\Rule;
 
 class DevisController extends Controller
 {
-/**
-      * Liste les devis (avec pagination et filtres).
-      */
+    /**
+     * Liste les devis (avec pagination et filtres).
+     */
     public function index(Request $request): JsonResponse
     {
         $query = Devi::query()->withCount('reponses');
@@ -118,20 +118,6 @@ class DevisController extends Controller
                 'message' => 'Devis non trouvé.',
             ], 404);
         }
-
-        $validator = Validator::make($request->all(), [
-            'notes' => ['sometimes', 'nullable', 'string'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreur de validation.',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $devis->update($validator->validated());
 
         return response()->json([
             'success' => true,

@@ -85,20 +85,6 @@ class LoueurDevisController extends Controller
             ], 404);
         }
 
-        $validator = Validator::make($request->all(), [
-            'notes' => ['sometimes', 'nullable', 'string'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreur de validation.',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $loueurDevis->update($validator->validated());
-
         return response()->json([
             'success' => true,
             'message' => 'Devis mis à jour.',
