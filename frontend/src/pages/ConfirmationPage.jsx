@@ -14,9 +14,12 @@ export default function ConfirmationPage() {
         <div className="max-w-2xl mx-auto bg-surface rounded-3xl shadow-2xl p-12 text-center border border-yellow-200">
 
           {/* Success Icon */}
-          <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-green-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
-            <i className="fas fa-check text-4xl text-white"></i>
-          </div>
+          {/* Success Icon */}
+<div className="w-20 h-20 bg-gradient-to-r from-green-400 to-green-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 21L16 28L31 13" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+</div>
 
           {/* Title */}
           <h1 className="text-4xl font-bold text-gradient mb-6">

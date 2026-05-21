@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 export default function MentionsLegales() {
   return (
@@ -130,12 +131,25 @@ export default function MentionsLegales() {
               Email : <a href="mailto:mediation@planetecourtier.com" className="text-orange-600 hover:underline">mediation@planetecourtier.com</a><br />
               Site internet : <a href="https://www.mediation-planetecourtier.com" className="text-orange-600 hover:underline" target="_blank" rel="noreferrer">www.mediation-planetecourtier.com</a>
             </p>
-            <p className="text-gray-600 mt-2">
-              Les documents en lien avec votre réclamation sont conservés cinq ans à compter de la date de réception.
-            </p>
+<p className="text-gray-600 mt-2">
+               Les documents en lien avec votre réclamation sont conservés cinq ans à compter de la date de réception.
+             </p>
+             
+             <div className="text-center">
+             <Link
+               to="/"
+               className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+             >
+               <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+               </svg>
+               Retour à l'accueil
+             </Link>
+             </div>
           </section>
         </article>
       </main>
+      
     </>
   );
 }

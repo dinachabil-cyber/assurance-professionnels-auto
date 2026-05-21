@@ -1,4 +1,6 @@
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+
 
 export default function PolitiqueConfidentialite() {
   return (
@@ -247,10 +249,22 @@ export default function PolitiqueConfidentialite() {
               Il est rappelé que AKSAM ASSURANCES dispose d'un délai légal de 2 mois pour répondre à votre demande. Cependant,
               nous mettons tout en œuvre pour respecter un délai maximum de 15 jours ouvrés suite à la réception de votre demande.
             </p>
-            <p className="text-gray-600 leading-relaxed">
+<p className="text-gray-600 leading-relaxed mb-4">
               Conformément à la loi 2014-344 du 17 mars 2014 relative à la consommation, vous disposez également d'un droit
               d'opposition au démarchage téléphonique en vous inscrivant gratuitement sur la liste d'opposition Bloctel.
             </p>
+            
+            <div className="text-center">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+            >
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Retour à l'accueil
+            </Link>
+            </div>
           </section>
         </article>
       </main>

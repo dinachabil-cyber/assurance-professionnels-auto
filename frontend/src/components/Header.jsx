@@ -1,34 +1,78 @@
+import { useEffect, useRef } from 'react';
+
 export default function Header() {
+  const textRef = useRef(null);
+  const cursorRef = useRef(null);
+  const fullText = "Quels que soient vos antécédents, obtenez un devis d'assurance pour professionnels auto en quelques clics";
+
+  useEffect(() => {
+    const el = textRef.current;
+    const cursor = cursorRef.current;
+    if (!el || !cursor) return;
+
+    el.textContent = '';
+    cursor.style.display = 'inline';
+    let i = 0;
+
+    const interval = setInterval(() => {
+      el.textContent += fullText[i];
+      i++;
+      if (i >= fullText.length) {
+        clearInterval(interval);
+        setTimeout(() => { cursor.style.display = 'none'; }, 800);
+      }
+    }, 35);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <header className="bg-[#312a8b] sticky top-0 z-50 py-4 shadow-2xl " role="banner">
-     <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
+    <header className="bg-[#312a8b] sticky top-0 z-50 py-4 shadow-2xl" role="banner">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
 
-  {/* LEFT SECTION → hidden on mobile */}
-  <div className="hidden lg:flex items-center space-x-4">
-    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shadow-lg">
-      <i className="fas fa-car text-2xl text-white"></i>
-    </div>
-    <div>
-      <h1 className="text-lg font-semibold text-white">
-        Quelque soient vos antécédents, obtenez un devis d&apos;assurance pour professionnels auto en quelques clics
-      </h1>
-    </div>
-  </div>
+          {/* LEFT SECTION → hidden on mobile */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg" style={{ background: 'rgba(255,255,255,0.2)' }}>
+              <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 8L50 14L50 32C50 41 42 49 32 53C22 49 14 41 14 32L14 14Z" fill="white"/>
+                <path d="M20 37L20 33L23 27L29 26L35 26L41 27L44 33L44 37Z" fill="#312a8b"/>
+                <path d="M24 27L25.5 31L38.5 31L40 27Z" fill="rgba(49,42,139,0.25)"/>
+                <circle cx="26" cy="37" r="3" fill="#312a8b"/>
+                <circle cx="38" cy="37" r="3" fill="#312a8b"/>
+                <circle cx="26" cy="37" r="1.3" fill="white"/>
+                <circle cx="38" cy="37" r="1.3" fill="white"/>
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold text-white max-w-xl">
+                <span ref={textRef}></span>
+                <span
+                  ref={cursorRef}
+                  className="inline-block w-0.5 h-5 bg-white ml-0.5 align-middle animate-pulse"
+                  style={{ display: 'none' }}
+                />
+              </h1>
+            </div>
+          </div>
 
-  {/* RIGHT SECTION → always visible (phone only on mobile too) */}
-  <div className="flex items-center space-x-4">
-    <div className="p-4 bg-white/20 rounded-2xl shadow-lg">
-      <i className="fas fa-phone text-2xl text-white"></i>
-    </div>
-    <div>
-      <span className="text-sm text-white/80 block">Conseil personnalisé</span>
-      <a href="tel:0182834800" className="text-2xl font-bold text-white">
-        01 82 83 48 00
-      </a>
-    </div>
-  </div>
+          {/* RIGHT SECTION → always visible */}
+          <div className="flex items-center space-x-4">
+            <div className="p-4 bg-white/20 rounded-2xl shadow-lg">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 6C5 5.45 5.45 5 6 5H9.5L11.5 10.5L9 12C10.2 14.5 13.5 17.8 16 19L17.5 16.5L23 18.5V22C23 22.55 22.55 23 22 23C12.5 23 5 15.5 5 6Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <span className="text-sm text-white/80 block">Conseil personnalisé</span>
+              <a href="tel:0182834800" className="text-2xl font-bold text-white hover:text-white/80 transition-colors">
+                01 82 83 48 00
+              </a>
+            </div>
+          </div>
 
-</div>
+        </div>
+      </div>
     </header>
   );
 }

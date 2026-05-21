@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const faqs = [
   { q: 'Qu\'est-ce que l\'assurance professionnelle automobile ?', a: 'L\'assurance professionnelle automobile est une couverture conçue pour les entreprises et professionnels travaillant dans le secteur automobile. Elle protège contre les risques spécifiques liés à leur activité professionnelle (responsabilité civile, dommages aux véhicules de clients, perte d\'exploitation, etc.).' },
@@ -37,7 +36,7 @@ export default function FAQSection() {
           ))}
         </div>
         <div className="text-center mt-10">
-          <Link to="/devis" className="inline-flex items-center gap-2 text-orange-600 font-medium hover:text-orange-700 hover:underline">Obtenir un devis gratuit <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg></Link>
+          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="inline-flex items-center gap-2 text-orange-600 font-medium hover:text-orange-700 hover:underline">Obtenir un devis gratuit <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg></button>
         </div>
       </div>
     </section>

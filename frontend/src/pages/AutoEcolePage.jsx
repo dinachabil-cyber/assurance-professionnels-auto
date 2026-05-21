@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useRef } from 'react';
 import { useDevisForm } from '../hooks/useDevisForm.js';
+import { Link } from 'react-router-dom';
 
 export default function AutoEcolePage() {
   const { submitting, error, handleSubmit } = useDevisForm('/api/v1/auto-ecole-devis');
@@ -88,10 +89,22 @@ export default function AutoEcolePage() {
           <div className="relative">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Devis assurance auto-école</h2>
             <p className="text-base mb-8 text-gray-800/80 max-w-xl mx-auto leading-relaxed">Pour obtenir un devis RC PRO auto-école, complétez le formulaire en haut de la page. Simple et rapide, obtenez votre devis en ligne et en quelques clics.</p>
-            <button onClick={scrollToForm} className="bg-white text-orange-500 font-bold py-3 px-8 rounded-xl hover:opacity-90 transition-all transform hover:scale-105 shadow-lg text-sm">Obtenir un devis personnalisé</button>
-          </div>
+
+<div className="text-center">
+         <Link
+           to="/"
+           className="inline-flex items-center gap-3 bg-white text-[#312a8b] font-bold py-4 px-10 rounded-2xl hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-2xl cursor-pointer"
+         >
+           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="#312a8b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+           </svg>
+           Retour à l'accueil
+         </Link>
+         </div>
+       </div>
         </section>
       </div>
+
     </>
   );
 }
