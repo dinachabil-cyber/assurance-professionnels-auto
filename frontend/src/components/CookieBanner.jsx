@@ -65,7 +65,7 @@ export default function CookieBanner() {
 
       {showBanner && (
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex gap-3 items-start">
                 <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center shrink-0">

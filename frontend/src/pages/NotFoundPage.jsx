@@ -8,7 +8,7 @@ export default function NotFoundPage() {
         <title>Page non trouvée — Aksam Assurance</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-      <main className="flex items-center justify-center px-4 py-20">
+      <main className="flex items-center justify-center py-20">
         <div className="text-center max-w-lg mx-auto">
           <p className="text-6xl font-bold text-orange-500 mb-4">404</p>
           <h1 className="text-3xl font-bold text-gray-800 mb-3">Page non trouvée</h1>

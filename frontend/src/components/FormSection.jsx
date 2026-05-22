@@ -118,7 +118,7 @@ const FormSection = forwardRef(function FormSection({
         <div className="absolute inset-0 scanlines-bg opacity-30"></div>
         <div className="absolute top-10 left-10 floating-animation"><i className="fas fa-car text-orange-400 text-6xl opacity-30"></i></div>
         <div className="absolute bottom-10 right-10 floating-animation" style={{ animationDelay: '-2s' }}><i className="fas fa-shield-alt text-orange-500 text-8xl opacity-25"></i></div>
-        <div className="max-w mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w mx-auto sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
            <div className="w-full lg:w-1/2 order-2 lg:order-1 flex">
   <div className="relative w-full h-full min-h-[400px] border-2 border-gray-200 rounded-xl overflow-hidden">
@@ -142,7 +142,7 @@ const FormSection = forwardRef(function FormSection({
 
   return (
     <section ref={ref} className="py-16 bg-gradient-to-br from-gray-50 via-white to-orange-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-flex items-center px-4 py-2 rounded-full bg-orange-100 text-orange-600 text-sm font-semibold mb-5">Assurance professionnelle</span>

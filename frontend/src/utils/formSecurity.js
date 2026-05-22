@@ -1,5 +1,5 @@
 const BANNED_WORDS = [
-  'bitcoin', 'btc', 'crypto', 'cryptocurrency', 'wallet', 'airdrop', 'ethereum',
+  'bitcoin', 'btc', 'crypto', 'cryptocurrency', '  ', 'airdrop', 'ethereum',
   'litecoin', 'dogecoin', 'nft', 'token', 'coinbase', 'binance', 'blockchain',
   'mining', 'miner', 'investment', 'profit', 'guaranteed', 'casino', 'poker',
   'viagra', 'pharmacy', 'loan', 'debt', 'credit', 'mortgage', 'lending'

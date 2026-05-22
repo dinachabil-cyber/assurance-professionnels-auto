@@ -14,7 +14,7 @@ export default function FAQSection() {
   const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
   return (
     <section className="py-16 md:py-24" id="questions">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold tracking-wider uppercase mb-4">Foire aux questions</p>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Questions fréquentes</h2>

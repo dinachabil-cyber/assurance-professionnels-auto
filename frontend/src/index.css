@@ -111,3 +111,34 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   color: var(--text-primary);
 }
+
+/* Mobile: remove page (outer) gutters so content is truly edge-to-edge */
+@media (max-width: 640px) {
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Common root wrappers in React apps */
+  #root {
+    width: 100%;
+  }
+
+  /* Target outer page wrappers only (don’t remove padding inside cards/sections) */
+  main,
+  .layout,
+  .page,
+  .mx-auto,
+  .max-w-7xl {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* If the app uses a specific root wrapper */
+  .container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
