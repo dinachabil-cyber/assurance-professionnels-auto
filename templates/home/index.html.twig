@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aksam Assurance — Assurance Professionnels Auto{% endblock %}
+
+{% block body %}
+    {{ render(controller('App\\Controller\\HomeController::header')) }}
+    
+    <main id="main-content" class="flex-1">
+        {# Hero Section with Form #}
+        <section class="py-12 lg:py-20 bg-white hero-pattern relative overflow-hidden">
+            <div class="absolute inset-0 scanlines-bg opacity-30"></div>
+            <div class="absolute top-10 left-10 floating-animation">
+                <i class="fas fa-car text-orange-400 text-6xl opacity-30"></i>
+            </div>
+            <div class="absolute bottom-10 right-10 floating-animation">
+                <i class="fas fa-shield-alt text-orange-500 text-8xl opacity-25"></i>
+            </div>
+
+            <div class="max-w mx-auto sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
+                    <div class="w-full lg:w-1/2 order-2 lg:order-1 flex">
+                        <div class="relative w-full h-full min-h-[400px] border-2 border-gray-200 rounded-xl overflow-hidden">
+                            <img
+                                src="https://assurance-professionnels-auto.fr/image/photo.jpg"
+                                alt="Véhicule professionnel"
+                                class="absolute inset-0 w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2 order-1 lg:order-2 flex">
+                        {{ include('partials/form_partial.html.twig', {'form': form, 'title': 'Obtenez un devis gratuit', 'subtitle': 'Complétez en 2 minutes', 'showActivity': true, 'showPostalCode': true}) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {# Insurance Info Section #}
+        <section class="py-20 max-w-3xl mx-auto sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Assurance des professionnels de l'automobile
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                L'assurance des professionnels de l'automobile fait référence à une forme d'assurance conçue spécialement pour les entreprises et les professionnels travaillant dans le secteur automobile. Cette assurance appelée aussi assurance multirisque professionnelle, vise à protéger les professionnels de l'automobile contre les risques spécifiques liés à leurs activités.
+            </p>
+        </section>
+
+        {# Activity Section #}
+        {% include 'partials/activity_section.html.twig' %}
+
+        {# Guarantee Section #}
+        {% include 'partials/guarantee_section.html.twig' %}
+
+        {# CTA Section #}
+        {% include 'partials/cta_section.html.twig' %}
+
+        {# Cookie Banner #}
+        {% include 'partials/cookie_banner.html.twig' %}
+    </main>
+
+    {{ include('partials/footer.html.twig') }}
+{% endblock %}
